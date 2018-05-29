@@ -14,4 +14,8 @@ public class DependTest {
         System.out.println("test 2 run !!");
     }
 
+    public  void tesdas(){
+//        Ass
+    }
+
 }
