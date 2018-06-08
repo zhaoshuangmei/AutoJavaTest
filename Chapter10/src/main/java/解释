@@ -1,0 +1,7 @@
+@Controller
+@EnableAUthConfigration
+我把我的类托管给spring boot
+
+@requestMapping我不管了
+@responseBody我改怎么访问("/")根目录
+SwaggerUi自动生成接口文档，类似插件
