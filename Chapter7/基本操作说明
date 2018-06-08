@@ -1,0 +1,19 @@
+-c moco框架的json 配置文件
+-p 端口
+java -jar  ./moco-runner-0.11.1-standalone.jar http -p 8888 -c moco框架的json 配置文件
+java -jar  ./moco-runner-0.11.1-standalone.jar http  -p 8888 -c startup1.json
+
+StartUpGet.json
+带参数的的get 请求
+http://localhost:8888/getwithparam?name=huhangsan&age=18
+
+url我们的访问路径
+
+这是我的第一个mock的post请求
+
+moco如何加入header信息
+moco重定向
+
+如何获取cookie ?
+如何携带cookies进行范文
+没有跨网络获取不到，network--localhost
