@@ -1,14 +1,13 @@
 package com.course.server;
 
 
+import com.course.bean.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -21,7 +20,7 @@ public class MyPostMethod {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ApiOperation(value ="登录接口，成功后获取cookies信息",httpMethod = "POST")
     public  String login(HttpServletResponse response,
-                         @RequestParam(value = "UserNmaae",required = true) String UserName,
+                         @RequestParam(value = "UserNmae",required = true) String UserName,
                          @RequestParam(value = "PassWord",required = true) String PassWord){
         if(UserName.equals("zhangsan") && PassWord.equals("123456")){
 
@@ -33,22 +32,31 @@ public class MyPostMethod {
         return  "用户名或密码错误！！！";
 
     }
-//    //如何验证cookies,如果验证通过了就把用户列表返回去
-//    @RequestMapping(value = "/getUserList",method = RequestMethod.POST)
-//    @ApiOperation(value = "获取用户列表",httpMethod ="POST" )
-//    public User GetUserList(HttpServletRequest request,
-//                            @ResponseBody User u){
-//        //获取cookies
-//        Cookie[] cookies = request.getCookies();
-//        //验证cookie是否合法
-//        for(Cookie c : cookies){
-//            if(c.getName()=="login"
-//                    && c.getValue()=="ture"
-//                    && u.getUsertname()=="zhng"){
-//
-//            }
-//
-//        }
-//
-//    }
+    //如何验证cookies,如果验证通过了就把用户列表返回去
+    @RequestMapping(value = "/getUserList",method = RequestMethod.POST)
+    @ApiOperation(value = "获取用户列表",httpMethod ="POST" )
+    public String  GetUserList(HttpServletRequest request,
+                            @RequestBody User u){
+        User user;
+        //获取cookies
+        Cookie[] cookies = request.getCookies();
+        //验证cookie是否合法
+        for(Cookie c : cookies){
+            if(c.getName()=="login"
+                    && c.getValue()=="ture"
+                    && u.getUsertname()=="zhang"
+                    && u.getPaasword()=="123456"){
+                user= new User();
+                user.setName("lisi");
+                user.setAge("18");
+                user.setSex("man");
+                return  user.toString();
+
+
+            }
+
+        }
+        return  "参数不合法";
+
+    }
 }
