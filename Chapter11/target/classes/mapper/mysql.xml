@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace ="com.course">
+    <!-->
+    namespace ="com.course"命名空间
+    id唯一，id定位sql语句
+    <-->
+    <select id="getUsercount" resultType="Integer">
+        SELECT  count(*)  from  user;
+    </select>
+</mapper>

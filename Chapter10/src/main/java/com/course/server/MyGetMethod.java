@@ -18,7 +18,7 @@ public class MyGetMethod {
     @RequestMapping(value = "/getCookies",method = RequestMethod.GET)
     @ApiOperation(value = "通过这个方法可以获取cookies",httpMethod ="GET" )
     public  String getCookies(HttpServletResponse resonse){
-        //HttpServerletRequest  装请求的信息类
+        //HttpServerletRequest  装请求的信息类 不是参数，
         //HttpServerletResponse  装响应的信息类
         Cookie cookie = new Cookie("login", "true");
         resonse.addCookie(cookie);
@@ -32,7 +32,7 @@ public class MyGetMethod {
 @RequestMapping(value = "/get/with/cookies", method = RequestMethod.GET)
 @ApiOperation(value = "要求客户端携带cookie访问",httpMethod = "GET")
 public  String  GetWithCookies(HttpServletRequest  request){
-    Cookie[] cookies = request.getCookies();
+    Cookie[] cookies = request.getCookies();   //cookis数组
     if(Objects.isNull(cookies)){
         return  "你必须携带cookies信息来----1";
 

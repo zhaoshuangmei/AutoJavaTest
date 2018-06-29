@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @Api(value = "/",description = "这是我全部的post请求")
-@RequestMapping("/V1")
+@RequestMapping("/V1")  //下面方法的所有url必须携带v1
 public class MyPostMethod {
     //这个变量是用来装我们的cookies信息的
     private  static Cookie cookie;
-    //用户登陆成功获取到cookies,然后在访问其他接口获取到列表
+    //用户登陆成功获取到cookies,然后在访问其他接口获取到列表，cookie加载到里面就可以访问了
+//    @RequestParam(value = "UserNmae"（调用的时候显示的名字）,required = true) String UserName,==》和前端名字可以不对应
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ApiOperation(value ="登录接口，成功后获取cookies信息",httpMethod = "POST")
     public  String login(HttpServletResponse response,
-                         @RequestParam(value = "UserNmae",required = true) String UserName,
+                          @RequestParam(value = "UserName",required = true) String UserName,
                          @RequestParam(value = "PassWord",required = true) String PassWord){
         if(UserName.equals("zhangsan") && PassWord.equals("123456")){
 
@@ -42,21 +44,18 @@ public class MyPostMethod {
         Cookie[] cookies = request.getCookies();
         //验证cookie是否合法
         for(Cookie c : cookies){
-            if(c.getName()=="login"
-                    && c.getValue()=="ture"
-                    && u.getUsertname()=="zhang"
-                    && u.getPaasword()=="123456"){
+            if(c.getName().equals("login")
+                    && c.getValue().equals("true")
+                    && u.getUserName().equals("zhangsan")
+                    && u.getPassWord().equals("123456")){
                 user= new User();
                 user.setName("lisi");
                 user.setAge("18");
                 user.setSex("man");
                 return  user.toString();
-
-
             }
 
         }
         return  "参数不合法";
-
     }
 }
